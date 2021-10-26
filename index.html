@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html>
+
+<html lang= "ko">
+
+<head>
+
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+<title>알상 소리 듣기와 기록 </title>
+
+</head>
+
+
+  
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.7.js'></script>
+<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+<style type='text/css'>
+  #playlist,audio{background:#666;width:330px;padding:15px;}
+.active a{color:#5DB0E6;text-decoration:none;}
+li a{color:#eeeedd;background:#333;padding:4px;display:block;text-decoration-line : none;}
+li a:hover{text-decoration:none;}
+</style>
+
+
+
+
+<script type='text/javascript'>
+$(window).load(function(){
+var audio;
+var playlist;
+var tracks;
+var current;
+
+init();
+function init(){
+  current = 0;
+  audio = $('audio');
+  playlist = $('#playlist');
+  tracks = playlist.find('li a');
+  len = tracks.length - 1;
+  audio[0].volume = .99;
+  playlist.find('a').click(function(e){
+      e.preventDefault();
+      link = $(this);
+      current = link.parent().index();
+      run(link, audio[0]);
+  });
+  audio[0].addEventListener('ended',function(e){
+      current++;
+      if(current == len){
+          current = 0;
+          link = playlist.find('a')[0];
+      }else{
+          link = playlist.find('a')[current];    
+      }
+      run($(link),audio[0]);
+  });
+}
+function run(link, player){
+      player.src = link.attr('href');
+      par = link.parent();
+      par.addClass('active').siblings().removeClass('active');
+      audio[0].load();
+      audio[0].play();
+}
+});//]]> 
+
+</script>
+
+
+
+<body>
+
+
+
+
+<!-- 
+
+   https://yamoo9.gitbook.io/css-grid/css-grid-term
+
+
+ </div>
+-->
+
+<div class="container">
+
+   <div class="item">
+
+      <p>  </p> 
+        <audio id="audio" tabindex="0" controls="" type="audio/mpeg">
+         <source type="audio/mp3" >
+     </audio>
+     <p>  </p> 
+     <ul id="playlist">
+         <li><a href="1.mp3">01.김연진</a></li>
+         <li><a href="2.mp3">02.김영은</a></li>
+         <li><a href="3.mp3">03.박정경</a></li>
+         <li><a href="4.mp3">04.배인숙</a></li>
+         <li><a href="5.mp3">05.손배영</a></li>
+         <li><a href="6.mp3">06.신솔아</a></li>
+         <li><a href="7.mp3">07.이은아</a></li>
+         <li><a href="8.mp3">08.이은혜</a></li>
+     </ul>
+      <font size ="2">
+      2021년 ArtE 아트프리즘 워크숍 <일상 소리 듣기와 기록> 
+      참여자들이 <br> 자신의 일상을 녹음한 소리들이며 그 각각의 소리를 시각화하였습니다.<br>
+      (디자인 김지원)
+      </font>
+   </div>
+
+
+
+
+
+
+    <div class="item">
+      <img src="1.png">         
+   </div>
+
+    
+   <div class="item">
+      <img src="2.png">        
+   </div>
+
+   <div class="item">
+      <img src="3.png">        
+   </div>
+    
+
+   <div class="item">
+      <img src="4.png">        
+   </div>
+
+
+   <div class="item">
+      <img src="5.png">        
+   </div>
+    
+
+   <div class="item">
+      <img src="6.png">        
+   </div>
+
+
+   <div class="item">
+      <img src="7.png">        
+   </div>
+
+
+   <div class="item"><img src="8.png"></div>
+    
+
+ 
+ </div>
+</body>
